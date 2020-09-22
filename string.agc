@@ -27,15 +27,15 @@ function center(text as string, number as integer, padding as string)
 	if count < 0
 		ret = ""
 	else
-		for i=0 to count
-			ret = ret + padding
-		next
-		ret = ret + text
-		for i=0 to count
-			ret = ret + padding
-		next
+		ret = repeat_str(padding,count) + text + repeat_str(padding,count)
 	endif
 endfunction ret
 function endswith(text as string, search as string)
 	ret = CompareString(mid(text,len(text)-len(search)+1,len(text)-len(search)-1),search,1,-1)
+endfunction ret
+function repeat_str(text as string, count as integer)
+	ret as String
+	for i=0 to count
+		ret = ret + text
+	next
 endfunction ret
