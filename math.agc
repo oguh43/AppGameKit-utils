@@ -1,18 +1,13 @@
 #include "constants.agc"
-function remainder(number1 as integer, number2 as integer)
+function remainder(number1, number2)
 	ret = number1-(number1/number2)*number2
 endfunction ret
 function factorial(number as integer)
-	if number < 0
-		fact = 0
-	elseif number = 0
-		fact = 1
-	else
-		fact = 1
-		for i = 1 to number
-			fact = fact * i
-		next
-	endif
+    if number<=1
+        fact=1
+    else
+        fact=number*factorial(number-1)
+    endif
 endfunction fact
 function comb(number1 as integer, number2 as integer)
 	if number1 >= number2
@@ -22,7 +17,7 @@ function comb(number1 as integer, number2 as integer)
 		result = 0
 	endif
 endfunction result
-function copysign(number1 as float, number2 as float)
+function copysign(number1, number2)
 	number1 = abs(number1)
 	if number2 < 0
 		times = -1
@@ -44,11 +39,11 @@ function prod(array as integer[], start as integer)
 		ret = ret * array[i]
 	next
 endfunction ret
-function rad(degrees as float)
+function rad(degrees)
 	ret as float
 	ret = degrees*(PI/180)
 endfunction ret
-function deg(radians as float)
+function deg(radians)
 	ret as float
 	ret = radians*(180/PI)
 endfunction ret
