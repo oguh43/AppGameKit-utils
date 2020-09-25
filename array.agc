@@ -85,3 +85,53 @@ function PrintI(array as integer[])
 	buffer = mid(buffer,1,len(buffer)-1)+"]"
 	print(buffer)
 endfunction
+function extendSF(array$ as string[], array# as float[], STRbefore# as integer)
+	ret as string[]
+	if STRbefore# = true
+		ret = array$
+		for i=0 to array#.length
+			ret.insert(str(array#[i]))
+		next
+	else
+		for i=0 to array#.length
+			ret.insert(str(array#[i]))
+		next
+		for i=0 to array$.length
+			ret.insert(array$[i])
+		next
+	endif
+endfunction ret
+function extendSI(array$ as string[], arrayI as integer[], STRbeforeIbool as integer)
+	ret as string[]
+	if STRbeforeIbool = true
+		ret = array$
+		for i=0 to arrayI.length
+			ret.insert(str(arrayI[i]))
+		next
+	else
+		for i=0 to arrayI.length
+			ret.insert(str(arrayI[i]))
+		next
+		for i=0 to array$.length
+			ret.insert(array$[i])
+		next
+	endif
+endfunction ret
+function extendFI(array# as float[], arrayI as integer[], FbeforeIbool as integer)
+	ret as string[]
+	if FbeforeIbool = true
+		for i=0 to array#.length
+			ret.insert(str(array#[i]))
+		next
+		for i=0 to arrayI.length
+			ret.insert(str(arrayI[i]))
+		next
+	else
+		for i=0 to arrayI.length
+			ret.insert(str(arrayI[i]))
+		next
+		for i=0 to array#.length
+			ret.insert(str(array#[i]))
+		next
+	endif
+endfunction ret
