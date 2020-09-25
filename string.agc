@@ -33,7 +33,7 @@ function endswith(text as string, search as string)
 endfunction ret
 function repeat$(text as string, count as integer)
 	ret as String
-	for i=0 to count
+	for i=0 to count - 1
 		ret = ret + text
 	next
 endfunction ret
@@ -173,8 +173,48 @@ function indexOf$(text as string, substring as string)
 		endif
 	endwhile
 endfunction -1
-/*function isUpper(text as String[])
+function isUpper(text as String)
 	array as string[]
 	array = list(text)
-	
-endfunction*/
+	lower_letters as integer[]
+	for i=97 to 122
+		lower_letters.insert(i)
+	next
+	for i=0 to array.length
+		if includesI(lower_letters,asc(array[i]))
+			exitfunction false
+		endif
+	next
+endfunction true
+function isLower(text as String)
+	array as string[]
+	array = list(text)
+	upper_letters as integer[]
+	for i=65 to 90
+		upper_letters.insert(i)
+	next
+	for i=0 to array.length
+		if includesI(upper_letters,asc(array[i]))
+			exitfunction false
+		endif
+	next
+endfunction true
+function isTitle(text as string)
+	array as string[]
+	array = split(text," ")
+	substring_array as string[]
+	substring_array = list(array[0])
+	points as integer
+	if isUpper(substring_array[0]) = true then points = points + 1
+	for i = 1 to substring_array.length
+		if isUpper(substring_array[i]) = false then points = points + 1
+	next
+	if points = substring_array.length + 1 then exitfunction true
+endfunction false
+function just(text as string, substring as string, count as integer, mode as string)
+		if CompareString(lower(mode),"l")
+			exitfunction text + repeat$(substring,count-len(text))
+		elseif CompareString(lower(mode),"r")
+			exitfunction repeat$(substring,count-len(text)) + text
+		endif
+endfunction ""
