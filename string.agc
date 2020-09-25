@@ -1,23 +1,23 @@
 #include "constants.agc"
 #include "array.agc"
-function split(stringToSplit as string, delimeterSymbol as String, bool as integer)
+function split(stringToSplit as string, delimeterSymbol as String)
 	splitArray as String[]
 	count as integer
-	if bool = false
-		count = CountStringTokens(stringToSplit, delimeterSymbol)
-		for i = 1 to count
-			splitArray.insert(GetStringToken(stringToSplit, delimeterSymbol, i))
-		next i
-	else
-		for i=1 to len(stringToSplit)
-			splitArray.insert(Mid(stringToSplit,i,1))
-		next
-	endif
+	count = CountStringTokens(stringToSplit, delimeterSymbol)
+	for i = 1 to count
+		splitArray.insert(GetStringToken(stringToSplit, delimeterSymbol, i))
+	next i
 endfunction splitArray
 function capitalize(text as string)
 	ret as String
 	ret = upper(mid(text,1,1))+mid(text,2,len(text))
 endfunction ret
+function list(text as string)
+	splitArray as string[]
+	for i=1 to len(text)
+			splitArray.insert(Mid(text,i,1))
+	next
+endfunction splitArray
 function center(text as string, number as integer, padding as string)
 	count as integer
 	count = (number - len(text)) / 2
@@ -39,7 +39,7 @@ function repeat$(text as string, count as integer)
 endfunction ret
 function isAlphanum(text as String)
 	array as String[]
-	array = split(text,"",1)
+	array = list(text)
 	alphanum as integer[]
 	for i=48 to 57
 		alphanum.insert(i)
@@ -65,7 +65,7 @@ function isAlphanum(text as String)
 endfunction ret
 function isAlpha(text as String)
 	array as String[]
-	array = split(text,"",1)
+	array = list(text)
 	alpha as integer[]
 	for i=65 to 122
 		if 90 < i and i < 97
@@ -88,7 +88,7 @@ function isAlpha(text as String)
 endfunction ret
 function isDecimal(text as String)
 	array as String[]
-	array = split(text,"",1)
+	array = list(text)
 	decimal as integer[]
 	for i=48 to 57
 		decimal.insert(i)
@@ -105,3 +105,76 @@ function isDecimal(text as String)
 		ret = 0
 	endif
 endfunction ret
+function isIdentifier(text as String)
+	array as String[]
+	array = list(text)
+	alphanum as integer[]
+	for i=48 to 57
+		alphanum.insert(i)
+	next
+	for i=65 to 122
+		if 90 < i and i < 97
+			if i = 95
+				alphanum.insert(i)
+			endif
+		else
+			alphanum.insert(i)
+		endif
+	next
+	ret as integer
+	for i=0 to array.length
+		if includesI(alphanum,asc(array[i])) = true
+			ret = ret + 1
+		endif
+	next
+	numbers as integer[9] = [48,49,50,51,52,53,54,55,56,57]
+	if array.length = ret-1
+		ret = 1
+		if includesI(numbers,asc(array[0])) = true
+			ret = 0
+		endif
+	else
+		ret = 0
+	endif
+endfunction ret
+function isSpace(text as String)
+	array as string[]
+	array = list(text)
+	ret as integer
+	for i=0 to array.length
+		if CompareString(array[i]," ") = true
+			ret = ret + 1
+		endif
+	next
+	if ret = array.length-1
+		ret = 1
+	else
+		ret = 0
+	endif
+endfunction ret
+function indexOf$(text as string, substring as string)
+	text_array as string[]
+	substring_array as string[]
+	text_array = list(text)
+	substring_array = list(substring)
+	start as integer
+	endI as integer
+	start = 0
+	endI = 0
+	while start < len(text)
+		if CompareString(text_array[start+endI],substring_array[endI]) = false
+			start = start + 1
+			endI = 0
+			continue
+		endif
+		endI = endI + 1
+		if endI = len(substring)
+			exitfunction start
+		endif
+	endwhile
+endfunction -1
+/*function isUpper(text as String[])
+	array as string[]
+	array = list(text)
+	
+endfunction*/
