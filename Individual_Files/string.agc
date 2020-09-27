@@ -152,7 +152,7 @@ function isSpace(text as String)
 		ret = 0
 	endif
 endfunction ret
-function indexOf$(text as string, substring as string)
+function indexOf(text as string, substring as string)
 	text_array as string[]
 	substring_array as string[]
 	text_array = list(text)
@@ -218,3 +218,19 @@ function just(text as string, substring as string, count as integer, mode as str
 			exitfunction repeat$(substring,count-len(text)) + text
 		endif
 endfunction ""
+function strip(text as string, array as string[])
+	ret1 as String[]
+	ret2 as string
+	text_array as string[]
+	text_array = list(text)
+	for i=0 to text_array.length
+		if includes$(array,text_array[i]) = false
+			ret1.insert(text_array[i])
+		endif
+	next
+	ret2 = join(ret1,"")
+endfunction ret2
+function re_find(text as string, start as string, end$ as string)
+	ret as string
+	ret = mid(text,indexOf(text,start)+len(start)+1,indexOf(text,end$)-indexof(text,start)-len(start))
+endfunction ret
