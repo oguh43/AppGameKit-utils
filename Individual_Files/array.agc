@@ -64,7 +64,11 @@ function Print$(array as string[])
 	for i=0 to array.length
 		buffer = buffer+chr(34)+array[i]+chr(34)+","
 	next
-	buffer = mid(buffer,1,len(buffer)-1)+"]"
+	if array.length <> -1
+		buffer = mid(buffer,1,len(buffer)-1)+"]"
+	else
+		buffer = "[]"
+	endif
 	print(buffer)
 endfunction
 function Print#(array as float[])
@@ -73,7 +77,11 @@ function Print#(array as float[])
 	for i=0 to array.length
 		buffer = buffer+str(array[i])+","
 	next
-	buffer = mid(buffer,1,len(buffer)-1)+"]"
+	if array.length <> -1
+		buffer = mid(buffer,1,len(buffer)-1)+"]"
+	else
+		buffer = "[]"
+	endif
 	print(buffer)
 endfunction
 function PrintI(array as integer[])
@@ -82,7 +90,11 @@ function PrintI(array as integer[])
 	for i=0 to array.length
 		buffer = buffer+str(array[i])+","
 	next
-	buffer = mid(buffer,1,len(buffer)-1)+"]"
+	if array.length <> -1
+		buffer = mid(buffer,1,len(buffer)-1)+"]"
+	else
+		buffer = "[]"
+	endif
 	print(buffer)
 endfunction
 function extendSF(array$ as string[], array# as float[], STRbefore# as integer)
@@ -134,4 +146,71 @@ function extendFI(array# as float[], arrayI as integer[], FbeforeIbool as intege
 			ret.insert(str(array#[i]))
 		next
 	endif
+endfunction ret
+function extendSS(array1 as string[], array2 as string[])
+	ret as string[]
+	ret = array1
+	for i=0 to array2.length
+		ret.insert(array2[i])
+	next
+endfunction ret
+function extendII(array1 as integer[], array2 as integer[])
+	ret as integer[]
+	ret = array1
+	for i=0 to array2.length
+		ret.insert(array2[i])
+	next
+endfunction ret
+function extendFF(array1 as float[], array2 as float[])
+	ret as float[]
+	ret = array1
+	for i=0 to array2.length
+		ret.insert(array2[i])
+	next
+endfunction ret
+function min#(array as float[])
+	ret as float
+	ret = array[0]
+	for i=0 to array.length
+		if array[i] < ret
+			ret = array[i]
+		endif
+	next
+endfunction ret
+function minI(array as integer[])
+	ret as integer
+	ret = array[0]
+	for i=0 to array.length
+		if array[i] < ret
+			ret = array[i]
+		endif
+	next
+endfunction ret
+function max#(array as float[])
+	ret as float
+	ret = array[0]
+	for i=0 to array.length
+		if array[i] > ret
+			ret = array[i]
+		endif
+	next
+endfunction ret
+function maxI(array as integer[])
+	ret as integer
+	ret = array[0]
+	for i=0 to array.length
+		if array[i] > ret
+			ret = array[i]
+		endif
+	next
+endfunction ret
+function char_range(range as string)
+	number1 as integer
+	number2 as integer
+	ret as string[]
+	number1 = asc(mid(range,1,1))
+	number2 = asc(mid(range,3,1))
+	for i=number1 to number2
+		ret.insert(chr(i))
+	next
 endfunction ret
