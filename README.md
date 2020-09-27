@@ -1,6 +1,6 @@
 # About "AppGameKit-utils"
-## What's this "library"?
-This "library" is a port of common python features/ functions to AppGamekit
+## What's this library?
+This library is a port of common python features/ functions to AppGamekit
 ## How to install
 Download "AppGameKitUtils.agc", place it in your project folder and add this line to your "main.agc": `#include "AppGameKitUtils.agc"`
 # Docs
