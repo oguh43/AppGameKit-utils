@@ -9,7 +9,7 @@ function factorial(number as integer)
         fact=number*factorial(number-1)
     endif
 endfunction fact
-function comb(number1 as integer, number2 as integer)
+function comb(number1, number2)
 	if number1 >= number2
 		result as float
 		result = factorial(number1)/factorial(number2)/factorial(number1-number2)
@@ -20,14 +20,20 @@ endfunction result
 function copysign(number1, number2)
     ret = abs(number1)*(abs(number2)/number2)
 endfunction ret
-function gcd(number1 as integer, number2 as integer)
+function gcd(number1, number2)
 	while number2 <> 0
 		temp = number2
 		number2 = remainder(number1,number2)
 		number1 = temp
 	endwhile
 endfunction number1
-function prod(array as integer[], start as integer)
+function prodI(array as integer[], start as integer)
+	ret = 1
+	for i = start to array.length
+		ret = ret * array[i]
+	next
+endfunction ret
+function prod#(array as float[], start as integer)
 	ret = 1
 	for i = start to array.length
 		ret = ret * array[i]
