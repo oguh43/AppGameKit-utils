@@ -13,7 +13,7 @@ function factorial(number as integer)
         fact=number*factorial(number-1)
     endif
 endfunction fact
-function comb(number1 as integer, number2 as integer)
+function comb(number1, number2)
 	if number1 >= number2
 		result as float
 		result = factorial(number1)/factorial(number2)/factorial(number1-number2)
@@ -24,14 +24,20 @@ endfunction result
 function copysign(number1, number2)
     ret = abs(number1)*(abs(number2)/number2)
 endfunction ret
-function gcd(number1 as integer, number2 as integer)
+function gcd(number1, number2)
 	while number2 <> 0
 		temp = number2
 		number2 = remainder(number1,number2)
 		number1 = temp
 	endwhile
 endfunction number1
-function prod(array as integer[], start as integer)
+function prodI(array as integer[], start as integer)
+	ret = 1
+	for i = start to array.length
+		ret = ret * array[i]
+	next
+endfunction ret
+function prod#(array as float[], start as integer)
 	ret = 1
 	for i = start to array.length
 		ret = ret * array[i]
@@ -288,7 +294,7 @@ function center(text as string, number as integer, padding as string)
 		ret = repeat$(padding,count) + text + repeat$(padding,count)
 	endif
 endfunction ret
-function endswith(text as string, search as string)
+function endsWith(text as string, search as string)
 	ret = CompareString(mid(text,len(text)-len(search)+1,len(text)-len(search)-1),search,1,-1)
 endfunction ret
 function repeat$(text as string, count as integer)
@@ -297,7 +303,7 @@ function repeat$(text as string, count as integer)
 		ret = ret + text
 	next
 endfunction ret
-function isAlphanum(text as String)
+function isAlnum(text as String)
 	array as String[]
 	array = list(text)
 	alphanum as integer[]
@@ -490,7 +496,7 @@ function strip(text as string, array as string[])
 	next
 	ret2 = join(ret1,"")
 endfunction ret2
-function re_find(text as string, start as string, end$ as string)
+function reFind(text as string, start as string, end$ as string)
 	ret as string
 	ret = mid(text,indexOf(text,start)+len(start)+1,indexOf(text,end$)-indexof(text,start)-len(start))
 endfunction ret
