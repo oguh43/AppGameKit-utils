@@ -28,7 +28,7 @@ function center(text as string, number as integer, padding as string)
 		ret = repeat$(padding,count) + text + repeat$(padding,count)
 	endif
 endfunction ret
-function endswith(text as string, search as string)
+function endsWith(text as string, search as string)
 	ret = CompareString(mid(text,len(text)-len(search)+1,len(text)-len(search)-1),search,1,-1)
 endfunction ret
 function repeat$(text as string, count as integer)
@@ -37,7 +37,7 @@ function repeat$(text as string, count as integer)
 		ret = ret + text
 	next
 endfunction ret
-function isAlphanum(text as String)
+function isAlnum(text as String)
 	array as String[]
 	array = list(text)
 	alphanum as integer[]
@@ -230,7 +230,7 @@ function strip(text as string, array as string[])
 	next
 	ret2 = join(ret1,"")
 endfunction ret2
-function re_find(text as string, start as string, end$ as string)
+function reFind(text as string, start as string, end$ as string)
 	ret as string
 	ret = mid(text,indexOf(text,start)+len(start)+1,indexOf(text,end$)-indexof(text,start)-len(start))
 endfunction ret
