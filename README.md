@@ -4,6 +4,12 @@ This "library" is a port of common python features/ functions to AppGamekit
 ## How to install
 Download "AppGameKitUtils.agc", place it in your project folder and add this line to your "main.agc": `#include "AppGameKitUtils.agc"`
 # Docs
+## Constants
+- true
+- false
+- null
+- NL
+- PI
 ## Math functions
 - remainder<br>
 description: Returns remainder of two supplied numbers<br>
