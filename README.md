@@ -66,12 +66,12 @@ usage: `includes$(string_array,element)`<br>
 types: `includes$(string[],string) -> integer`<br>
 - includes#<br>
 description: Returns true if given float array contains supplied element<br>
-usage: `includes$(float_array,element)`<br>
-types: `includes$(float[],string) -> integer`<br>
+usage: `includes#(float_array,element)`<br>
+types: `includes#(float[],string) -> integer`<br>
 - includesI<br>
 description: Returns true if given integer array contains supplied element<br>
-usage: `includes$(integer_array,element)`<br>
-types: `includes$(integer[],string) -> integer`<br>
+usage: `includesI(integer_array,element)`<br>
+types: `includesI(integer[],string) -> integer`<br>
 - Print$<br>
 description: Prints the given string array<br>
 usage: `Print$(string_array)`<br>
