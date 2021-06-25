@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+    "name": "Scancodes search",
+    "version": "1.0",
+    "description": "Adds a searchbar to agk 's scancodes page.",
+    "content_scripts": [
+      {
+        "matches": ["*://*.appgamekit.com/documentation/guides/scancodes.htm",
+                    "file:///*/*/scancodes.htm"
+                    ],
+        "js": ["script.js"]
+      }
+    ]
+  }
