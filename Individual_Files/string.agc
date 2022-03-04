@@ -234,3 +234,40 @@ function reFind(text as string, start as string, end$ as string)
 	ret as string
 	ret = mid(text,indexOf(text,start)+len(start)+1,indexOf(text,end$)-indexof(text,start)-len(start))
 endfunction ret
+function getTextBoundingBoxOffsetY(textId as integer)
+	textWidth = GetTextTotalWidth(textId)
+	startingX = GetTextX(textId)
+	startingY = GetTextY(textId)
+	textR = GetTextColorRed(textId)
+	textG = GetTextColorGreen(textId)
+	textB = GetTextColorBlue(textId)
+	background = CreateSprite(0)
+	SetSpriteSize(background, GetWindowWidth(), GetWindowHeight())
+	spriteR = textR + 100
+	if spriteR > 255 then spriteR = spriteR - 255
+	spriteG = textG + 100
+	if spriteG > 255 then spriteG = spriteG - 255
+	spriteB = textB + 100
+	if spriteB > 255 then spriteB = spriteB - 255
+	SetSpriteColor(background, spriteR, spriteG, spriteB, 255)
+	SetSpriteDepth(background, 0)
+	originalDepth = GetTextDepth(textId)
+	SetTextDepth(textId,0)
+	Render()
+	img = GetImage(startingX, startingY, textWidth, GetWindowHeight())
+	memImg = CreateMemblockFromImage(img)
+	SetTextDepth(textId,originalDepth)
+	DeleteSprite(background)
+	memWidth = GetMemblockInt(memImg, 0) // or textWidth
+	for y = 0 to GetMemblockInt(memImg, 4) step 1
+		for x = 0 to memWidth step 1
+			memOffset = y * memWidth * 4 + x * 4 + 12
+			memR = GetMemblockByte(memImg, memOffset)
+			memG = GetMemblockByte(memImg, memOffset + 1)
+			memB = GetMemblockByte(memImg, memOffset + 2)
+			if textR = memR and textG = memG and textB = memB
+				exitfunction y
+			endif
+		next x
+	next y
+endfunction 0
