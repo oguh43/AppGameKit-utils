@@ -205,3 +205,11 @@ types: `reFind(string,string,string) -> string`<br>
 description: Scans for the nearest pixel color matching that of the given text and returns the y offset<br>
 usage: `getTextBoundingBoxOffsetY(textId)`
 types: `getTextBoundingBoxOffsetY(integer) -> integer`
+- wordWrap<br>
+description: Wraps words based on the maxWidth parameter<br>
+usage: `wordWrap(text,maxWidth,forceStrict,lineBreakChar)`
+types: `wordWrap(integer,integer,integer,string) -> string`
+- strictWordWrap<br>
+description: Wraps the given word regardless of spaces<br>
+usage: `strictWordWrap(word,maxWidth,textSize,lineBreakChar)`
+types: `wordWrap(string,integer,integer,string) -> string`
