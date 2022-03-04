@@ -271,3 +271,63 @@ function getTextBoundingBoxOffsetY(textId as integer)
 		next x
 	next y
 endfunction 0
+function wordWrap(text as integer, maxWidth as integer, forceStrict as integer, lineBreakChar as string)
+	originalText as string
+	originalText = GetTextString(text)
+	words as string[]
+	words = split(originalText, " ")
+	newText as string
+	flag = 0
+	for i=0 to words.length
+		if flag <> 0
+			SetTextString(text, GetTextString(text) + " " + words[i])
+		else
+			SetTextString(text,words[i])
+		endif
+		length = GetTextTotalWidth(text)
+		if length <= maxWidth or flag = 0
+			if length > maxWidth and forceStrict = 1
+				newText = newText + strictWordWrap(words[i], maxWidth, GetTextSize(text), lineBreakChar)
+			else
+				if mid(newText,len(newText)-1,-1) = chr(13)+chr(10) or len(newText) = 0
+					newText = newText + words[i]
+				else
+					newText = newText + " " + words[i]
+				endif
+				flag = flag + 1
+			endif
+		else
+			newText = newText + NL
+			i = i - 1
+			flag = 0
+		endif
+	next
+	SetTextString(text, newText)
+endfunction
+function strictWordWrap(word as string, maxWidth as integer, textSize as integer, lineBreakChar as string)
+	text = 2
+	CreateText(text, "")
+	SetTextSize(text, textSize)
+	letters as string[]
+	letters = list(word)
+	newString as string
+	buffer as string
+	flag = 0
+	for i=0 to letters.length
+		if flag <> 0
+			SetTextString(text,GetTextString(text)+letters[i])
+		else
+			SetTextString(text,letters[i])
+		endif
+		length = GetTextTotalWidth(text)
+		if length <= maxWidth or flag = 0
+			buffer = buffer + letters[i]
+			flag = flag + 1
+		else
+			buffer = buffer + lineBreakChar + NL
+			i = i - 1
+			flag = 0
+		endif
+	next
+	DeleteText(text)
+endfunction buffer 
