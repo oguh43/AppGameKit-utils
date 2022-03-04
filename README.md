@@ -201,3 +201,7 @@ types: `strip(string,string[]) -> string`<br>
 description: Returns substring found between strings in given string<br>
 usage: `reFind(text,start,end$)`<br>
 types: `reFind(string,string,string) -> string`<br>
+- getTextBoundingBoxOffsetY<br>
+description: Scans for the nearest pixel color matching that of the given text and returns the y offset<br>
+usage: `getTextBoundingBoxOffsetY(textId)`
+types: `getTextBoundingBoxOffsetY(integer) -> integer`
