@@ -305,8 +305,7 @@ function wordWrap(text as integer, maxWidth as integer, forceStrict as integer, 
 	SetTextString(text, newText)
 endfunction
 function strictWordWrap(word as string, maxWidth as integer, textSize as integer, lineBreakChar as string)
-	text = 2
-	CreateText(text, "")
+	text = CreateText("")
 	SetTextSize(text, textSize)
 	letters as string[]
 	letters = list(word)
