@@ -524,7 +524,7 @@ function getTextBoundingBoxOffsetY(textId as integer)
 	memImg = CreateMemblockFromImage(img)
 	SetTextDepth(textId,originalDepth)
 	DeleteSprite(background)
-	memWidth = GetMemblockInt(memImg, 0) // or textWidth
+	memWidth = GetMemblockInt(memImg, 0) - 1 // or textWidth
 	for y = 0 to GetMemblockInt(memImg, 4) step 1
 		for x = 0 to memWidth step 1
 			memOffset = y * memWidth * 4 + x * 4 + 12
